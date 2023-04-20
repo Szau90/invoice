@@ -9,7 +9,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     console.log(data);
 
     const client = await MongoClient.connect(
-      "mongodb+srv://szau90:FordMondeo12@cluster0.jfdopa9.mongodb.net/invoices?retryWrites=true&w=majority"
+     process.env.MONGO_URL
     );
     const db = client.db();
 

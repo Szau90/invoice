@@ -52,7 +52,7 @@ const DetailPage = ({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const client = await MongoClient.connect(
-    "mongodb+srv://szau90:FordMondeo12@cluster0.jfdopa9.mongodb.net/invoices?retryWrites=true&w=majority"
+    process.env.MONGO_URL
   );
   const db = client.db();
 
@@ -71,7 +71,7 @@ export const getStaticProps: GetStaticProps<{
   invoices: Invoices[];
 }> = async () => {
   const client = await MongoClient.connect(
-    "mongodb+srv://szau90:FordMondeo12@cluster0.jfdopa9.mongodb.net/invoices?retryWrites=true&w=majority"
+    process.env.MONGO_URL
   );
   const db = client.db();
 

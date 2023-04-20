@@ -30,7 +30,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./invocie-app.png)
+![](./invoice-app.png)
 
 
 

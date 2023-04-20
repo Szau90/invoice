@@ -1,0 +1,33 @@
+.wrapper {
+  position: relative;
+  overflow: hidden;
+  border-bottom-right-radius: 20px;
+}
+.box1 {
+  width: 103px;
+  height: 103px;
+  background-color: #7c5dfa;
+  position: relative;
+  z-index: 1;
+  border-top-right-radius: 20px;
+}
+.box2 {
+  width: 103px;
+  height: 103px;
+  z-index: 2;
+  background-color: #9277ff;
+  position: absolute;
+  top: 51.5px;
+  border-top-left-radius: 20px;
+}
+.logo {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  width: 40px;
+  height: 40px;
+  top: 33.29px;
+  left: 32px;
+}

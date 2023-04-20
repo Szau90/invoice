@@ -1,0 +1,57 @@
+.card {
+  display: flex;
+  width: 192px;
+  height: 128px;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 16px;
+  border-radius: 8px;
+  position: absolute;
+  left: 52%;
+  top: 132px;
+}
+.card label {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+  font-weight: 700;
+}
+.card input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background-color: #dfe3fa;
+  border: 1px solid #7c5dfa;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.card input:checked {
+  background-image: url("/assets/icon-check.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-color: #7c5dfa;
+}
+.dark {
+  background-color: #252945;
+}
+.dark input {
+  background-color: #1e2139;
+}
+.dark label {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .card {
+    top: 202px;
+    left: 46%;
+  }
+}

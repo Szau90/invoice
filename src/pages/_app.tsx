@@ -1,6 +1,16 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import type { AppProps } from "next/app";
+import { League_Spartan } from "next/font/google";
+import { Provider } from "react-redux";
+import { store } from "@/store";
+
+const league = League_Spartan({ subsets: ["latin"] });
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    <Provider store={store}>
+      <main className={league.className}>
+        <Component {...pageProps} />
+      </main>
+    </Provider>
+  );
 }

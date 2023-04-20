@@ -1,0 +1,37 @@
+.btn button {
+  border: none;
+  width: 80px;
+  font-size: 15px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+  font-weight: 700;
+  color: #000;
+  background-color: inherit;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.btn button:hover {
+  cursor: pointer;
+}
+.dark button {
+  border: none;
+  width: 80px;
+  font-size: 15px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+  font-weight: 700;
+  color: #fff;
+  background-color: inherit;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .btn {
+    margin-top: 129px;
+  }
+}

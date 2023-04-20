@@ -1,0 +1,264 @@
+.box {
+  display: flex;
+  flex-flow: column nowrap;
+  background-color: #fff;
+  border-radius: 8px;
+  margin-top: 24px;
+  height: fit-content;
+  margin-bottom: 20px;
+}
+.dark {
+  display: flex;
+  flex-flow: column nowrap;
+  background-color: #1e2139;
+  border-radius: 8px;
+  margin-top: 24px;
+}
+
+.table {
+  width: 730px;
+  display: flex;
+  flex-flow: row nowrap;
+}
+.table h1 {
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: -0.25px;
+  font-weight: 700;
+}
+.table p {
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: -0.1px;
+  color: #7e88c3;
+}
+
+.darkTable p {
+  color: #dfe3fa;
+}
+.col1 {
+  margin-top: 50px;
+  margin-left: 48px;
+  margin-right: 90px;
+  width: 82px;
+}
+.col2 {
+  margin-top: 155px;
+  margin-right: 90px;
+  width: fit-content;
+  height: 130px;
+}
+.col2 h1 {
+  margin-top: 13px;
+  margin-bottom: 13px;
+}
+.col3 {
+  margin-top: 155px;
+  margin-right: 22px;
+  width: fit-content;
+  height: 48px;
+}
+.col4 {
+  width: fit-content;
+  height: fit-content;
+  margin-top: 50px;
+}
+.title {
+  margin-bottom: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  height: 48px;
+}
+.title span {
+  color: #888eb0;
+}
+.title h1 {
+  margin-bottom: 0;
+}
+.title p {
+  margin-top: 0;
+}
+.dark h1 {
+  color: #fff;
+}
+
+.date {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+
+  height: 48px;
+}
+.date p {
+  margin-bottom: 5px;
+}
+.payment {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  height: 48px;
+}
+.payment p {
+  margin-bottom: 5px;
+}
+.container {
+  display: grid;
+  margin-top: 44px;
+  width: 634px;
+  height: fit-content;
+  background-color: #f8f8fb;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+.darkContainer {
+  background-color: #252945;
+}
+.container p {
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: -0.1px;
+  color: #7e88c3;
+  margin-top: 33px;
+}
+.container h1 {
+  font-size: 15px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+}
+.c1 {
+  grid-column: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 33px;
+  align-items: center;
+}
+.c2 {
+  grid-column: 2;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 33px;
+  align-items: center;
+}
+.c3 {
+  grid-column: 3;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 33px;
+  align-items: center;
+}
+.c4 {
+  grid-column: 4;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 33px;
+  align-items: center;
+}
+.c2 h1 {
+  color: #7e88c3;
+}
+.darkCol p {
+  color: #dfe3fa;
+}
+.c3 h1 {
+  color: #7e88c3;
+}
+.darkCol h1 {
+  color: #fff;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+}
+.footer {
+  width: 634px;
+  height: 80px;
+  background-color: #252945;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  color: #fff;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.darkFooter {
+  background-color: #0c0e16;
+}
+.footer h1 {
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: -0.5px;
+  font-weight: 700;
+  margin-right: 32px;
+}
+.footer p {
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: -0.1px;
+  margin-left: 32px;
+}
+.mobile {
+  display: none;
+}
+.desktop {
+  display: block;
+}
+
+@media (max-width: 375px) {
+  .table {
+    display: grid;
+    width: 327px;
+  }
+  .col1 {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    width: fit-content;
+  }
+  .col2 {
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    margin-top: 225px;
+  }
+  .col3 {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+  }
+  .col4 {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+  }
+  .mobile {
+    display: block;
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+  }
+  .desktop {
+    display: none;
+  }
+  .container {
+    width: 279px;
+  }
+  .info {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 96px;
+    color: #7e88c3;
+  }
+  .c1 {
+    gap: 0;
+  }
+  .c4 {
+    gap: 50px;
+  }
+  .footer {
+    width: 279px;
+  }
+}

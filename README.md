@@ -30,14 +30,14 @@ Users should be able to:
 
 ### Screenshot
 
-![](./invocie-app.jpg)
+![](./invocie-app.png)
 
 
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [github](https://github.com/Szau90/invoice)
+- Live Site URL: [live site](https://invoice-ashen.vercel.app)
 
 
 

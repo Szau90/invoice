@@ -1,6 +1,8 @@
 import styles from "@/styles/InvoiceData.module.css";
 import { useAppSelector } from "@/Hooks/hooks";
 import DeleteModal from "../Ui/DeleteModal";
+import { Item } from "@/models/Invoices";
+import Items from "./Items";
 
 const InvoiceData: React.FC<{
   id: string;
@@ -20,20 +22,7 @@ const InvoiceData: React.FC<{
     street: string;
   };
   paymentDue: Date;
-  item: [
-    {
-      name: string;
-      price: number;
-      quantity: number;
-      total: number;
-    },
-    {
-      name: string;
-      price: number;
-      quantity: number;
-      total: number;
-    }
-  ];
+  item: Item[];
   price: number;
   description: string;
 }> = (props) => {
@@ -119,42 +108,13 @@ const InvoiceData: React.FC<{
         </div>
         <section className={styles.wrapper}>
           <div className={darkContainerHandler}>
-            <div className={darkC1handler}>
-              <p className={styles.desktop}>Item name</p>
-              <h1>{item[0].name}</h1>
-              <div className={`${styles.mobile} ${styles.info}`}>
-                <h1>{item[0].quantity} x</h1>
-                <h1>£ {item[0].price}</h1>
+            <div className={styles.itemTable}>
+              <p className={`${styles.desktop} ${styles.name}`}>Item name</p>
+              <p className={`${styles.desktop} ${styles.qty}`}>Qty.</p>
+              <p className={`${styles.desktop} ${styles.price}`}>Price</p>
+              <p className={`${styles.desktop} ${styles.total}`}>Total</p>
               </div>
-              {!isEmpty && (
-                <div>
-                  <h1>{item[1].name}</h1>
-                  <div className={`${styles.mobile} ${styles.info}`}>
-                    <h1 className={styles.mobile}>{item[1].quantity} x</h1>
-                    <h1 className={styles.mobile}>£ {item[1].price}</h1>
-                  </div>
-                </div>
-              )}
-            </div>
-            <div className={darkC2handler}>
-              <p className={styles.desktop}>Qty.</p>
-              <h1 className={styles.desktop}>{item[0].quantity}</h1>
-              {!isEmpty && (
-                <h1 className={styles.desktop}>{item[1].quantity}</h1>
-              )}
-            </div>
-            <div className={darkC3handler}>
-              <p className={styles.desktop}>Price</p>
-              <h1 className={styles.desktop}>£ {item[0].price}</h1>
-              {!isEmpty && (
-                <h1 className={styles.desktop}>£ {item[1].price}</h1>
-              )}
-            </div>
-            <div className={darkC4handler}>
-              <p className={styles.desktop}>Total</p>
-              <h1>£ {item[0].total.toFixed(2)}</h1>
-              {!isEmpty && <h1>£ {item[1].total}</h1>}
-            </div>
+              <Items items={item} />
           </div>
 
           <div className={darkFooterHandler}>

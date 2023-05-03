@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    width: 570px;
+    height: fit-content;
+}
+.name {
+    width: 200px;
+}
+.qty {
+    width: 60px;
+}
+.price {
+    width: 100px;
+}
+.total {
+    width: 100px;
+}
+
+.mobile {
+    display: none;
+  }
+
+@media (max-width:375) {
+    .info {
+        display: flex;
+        flex-flow: row nowrap;
+        width: 96px;
+        color: #7e88c3;
+      }
+}

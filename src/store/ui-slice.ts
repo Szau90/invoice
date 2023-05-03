@@ -7,8 +7,6 @@ export const uiSlice = createSlice({
     showCheckboxModal: false,
     filter: "all",
     checked: false,
-    showFirstItem: false,
-    showSecondItem: false,
     showDeleteModal: false,
     isDarkMode: false,
   },
@@ -37,18 +35,7 @@ export const uiSlice = createSlice({
     resetFilter(state) {
       state.filter = "all";
     },
-    firstItemOn(state) {
-      state.showFirstItem = true;
-    },
-    firstItemOff(state) {
-      state.showFirstItem = false;
-    },
-    secondItemOn(state) {
-      state.showSecondItem = true;
-    },
-    secondItemOff(state) {
-      state.showSecondItem = false;
-    },
+    
   },
 });
 

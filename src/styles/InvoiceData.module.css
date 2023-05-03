@@ -103,7 +103,10 @@
   margin-bottom: 5px;
 }
 .container {
-  display: grid;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
   margin-top: 44px;
   width: 634px;
   height: fit-content;
@@ -205,6 +208,25 @@
 }
 .desktop {
   display: block;
+}
+
+.itemTable {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  width: 570px;
+}
+.name {
+  width: 200px;
+}
+.qty {
+  width: 60px;
+}
+.price {
+  width: 100px;
+}
+.total {
+  width: 100px;
 }
 
 @media (max-width: 375px) {

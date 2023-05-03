@@ -3,6 +3,7 @@ import SideBar from "../Ui/SideBar";
 import InvoiceItem from "./InvoiceItem";
 import { useAppSelector } from "@/Hooks/hooks";
 import EditFormReact from "../Form/EditFormReact";
+import { Item } from "@/models/Invoices";
 
 const InvoiceDetail: React.FC<{
   id: string;
@@ -23,20 +24,7 @@ const InvoiceDetail: React.FC<{
     street: string;
   };
   paymentDue: Date;
-  item: [
-    {
-      name: string;
-      price: number;
-      quantity: number;
-      total: number;
-    },
-    {
-      name: string;
-      price: number;
-      quantity: number;
-      total: number;
-    }
-  ];
+  item: Item[];
   price: number;
   description: string;
 }> = (props) => {

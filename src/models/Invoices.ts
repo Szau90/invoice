@@ -1,3 +1,10 @@
+export interface Item {
+  name:string;
+  price: number;
+  quantity: number;
+  total: number;
+}
+
 interface Invoices {
   clientAddress: {
     city: string;
@@ -10,20 +17,7 @@ interface Invoices {
   createdAt: Date;
   description: string;
   id: string;
-  items: [
-    {
-      name: string;
-      price: number;
-      quantity: number;
-      total: number;
-    },
-    {
-      name: string;
-      price: number;
-      quantity: number;
-      total: number;
-    }
-  ];
+  items: Item[];
   paymentDue: Date;
   paymentTerms: number;
   senderAddress: {

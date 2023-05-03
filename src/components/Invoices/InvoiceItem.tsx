@@ -5,6 +5,7 @@ import StatusLabel from "./StatusLabel";
 import BtnGrp from "../Ui/BtnGrp";
 import { useAppSelector } from "@/Hooks/hooks";
 import { useRouter } from "next/router";
+import { Item } from "@/models/Invoices";
 
 const InvoiceItem: React.FC<{
   id: string;
@@ -25,20 +26,7 @@ const InvoiceItem: React.FC<{
     street: string;
   };
   paymentDue: Date;
-  item: [
-    {
-      name: string;
-      price: number;
-      quantity: number;
-      total: number;
-    },
-    {
-      name: string;
-      price: number;
-      quantity: number;
-      total: number;
-    }
-  ];
+  item: Item[];
   price: number;
   description: string;
 }> = (props) => {

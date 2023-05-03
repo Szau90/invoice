@@ -62,7 +62,7 @@ const Home = ({ invoices }: InferGetStaticPropsType<typeof getStaticProps>) => {
         key={invoice.id}
         id={invoice.id}
         clientName={invoice.clientName}
-        price={invoice.items[0].price}
+        price={invoice.total}
         status={invoice.status}
         createdAt={invoice.createdAt}
       />
@@ -77,7 +77,7 @@ const Home = ({ invoices }: InferGetStaticPropsType<typeof getStaticProps>) => {
           key={invoice.id}
           id={invoice.id}
           clientName={invoice.clientName}
-          price={invoice.items[0].price}
+          price={invoice.total}
           status={invoice.status}
           createdAt={invoice.createdAt}
         />
@@ -91,7 +91,7 @@ const Home = ({ invoices }: InferGetStaticPropsType<typeof getStaticProps>) => {
           key={invoice.id}
           id={invoice.id}
           clientName={invoice.clientName}
-          price={invoice.items[0].price}
+          price={invoice.total}
           status={invoice.status}
           createdAt={invoice.createdAt}
         />
@@ -105,7 +105,7 @@ const Home = ({ invoices }: InferGetStaticPropsType<typeof getStaticProps>) => {
           key={invoice.id}
           id={invoice.id}
           clientName={invoice.clientName}
-          price={invoice.items[0].price}
+          price={invoice.total}
           status={invoice.status}
           createdAt={invoice.createdAt}
         />

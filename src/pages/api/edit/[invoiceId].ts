@@ -15,35 +15,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const invoiceCollection = db.collection("invoices");
 
-    let items;
-
-    const empty = data.items[1] === undefined;
-
-    if (empty) {
-      items = [
-        {
-          name: data.items[0].name,
-          price: data.items[0].price,
-          quantity: data.items[0].quantity,
-          total: data.items[0].total,
-        },
-      ];
-    } else {
-      items = [
-        {
-          name: data.items[0].name,
-          price: data.items[0].price,
-          quantity: data.items[0].quantity,
-          total: data.items[0].total,
-        },
-        {
-          name: data.items[1].name,
-          price: data.items[1].price,
-          quantity: data.items[1].quantity,
-          total: data.items[1].total,
-        },
-      ];
-    }
 
     const result = await invoiceCollection.replaceOne(
       {
@@ -61,7 +32,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         createdAt: data.createdAt,
         description: data.description,
         id: data.id,
-        items: items,
+        items: data.items,
         paymentTerms: data.paymentTerms,
         senderAddress: {
           city: data.senderAddress.city,

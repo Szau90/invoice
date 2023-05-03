@@ -2,6 +2,8 @@ import styles from "@/styles/TrashBtn.module.css";
 import Image from "next/image";
 
 const TrashBtn: React.FC<{ action: () => void }> = (props) => {
+
+
   return (
     <>
       <div className={styles.btn}>

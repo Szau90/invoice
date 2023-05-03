@@ -186,14 +186,28 @@
   flex-flow: row nowrap;
   gap: 10px;
 }
+.labelGrp {
+  width: 504px;
+  display: flex;
+ 
+}
 .itemInputGrp label {
-  display: block;
+  display: inline-block;
   font-size: 13px;
   line-height: 15px;
   letter-spacing: -0.1px;
   color: #7e88c3;
   font-weight: 500;
   margin-bottom: 9px;
+}
+.labelGrp label:nth-child(1) {
+  width: 235px;
+}
+.labelGrp label:nth-child(2) {
+  width: 70px;
+}
+.labelGrp label:nth-child(3) {
+  width: 120px;
 }
 .date input:focus {
   border: 1px solid #7c5dfa;
@@ -281,12 +295,7 @@
   justify-content: center;
   margin-top: 25px;
 }
-.firstTrashBtn {
-  margin-top: 40px;
-}
-.trashBtn {
-  margin-top: 40px;
-}
+
 .actionBtnGrp {
   display: flex;
   flex-flow: row nowrap;
@@ -383,6 +392,71 @@
 }
 .hide {
   display: none;
+}
+
+.itemInput {
+  margin-bottom: 13px;
+}
+.itemName {
+  width: 214px;
+  height: 48px;
+  outline: none;
+  border: 1px solid #dfe3fa;
+  border-radius: 5px;
+  font-size: 15px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+  font-weight: 700;
+  color: #0c0e16;
+  margin-right: 13px;
+}
+.itemQty {
+  width: 46px;
+  height: 48px;
+  outline: none;
+  border: 1px solid #dfe3fa;
+  border-radius: 5px;
+  font-size: 15px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+  font-weight: 700;
+  color: #0c0e16;
+  margin-right: 13px;
+
+}
+.itemPrice {
+  width: 100px;
+  height: 48px;
+  outline: none;
+  border: 1px solid #dfe3fa;
+  border-radius: 5px;
+  font-size: 15px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+  font-weight: 700;
+  color: #0c0e16;
+
+
+}
+.itemTotal {
+  width: 70px;
+  height: 48px;
+  outline: none;
+  border: none;
+  background-color: #fff;
+  text-align: center;
+  color: #7e88c3;
+  font-size: 15px;
+  line-height: 15px;
+  letter-spacing: -0.25px;
+  font-weight: 700;
+}
+.itemBtn {
+  width: 504px;
+}
+.invalid {
+  border-color: #ec5757;
+  outline: none;
 }
 .invalid input {
   border-color: #ec5757;

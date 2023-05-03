@@ -1,11 +1,10 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import Invoices from "@/models/Invoices";
 import { makeid } from "@/components/Functions/makeId";
 import { useEffect, FC } from "react";
 import { uiActions } from "@/store/ui-slice";
 import { useAppDispatch, useAppSelector } from "@/Hooks/hooks";
 import { addDays } from "@/components/Functions/addDate";
-import { sumValue } from "@/components/Functions/total";
 import styles from "@/styles/NewForm.module.css";
 import TrashBtn from "../Ui/TrashBtn";
 import LightGrayBtn from "../Ui/LightGrayBtn";
@@ -20,30 +19,10 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 const ReactHookFrom: FC = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const showFirstItem = useAppSelector((state) => state.ui.showFirstItem);
-  const showMoreItem = useAppSelector((state) => state.ui.showSecondItem);
-  const handler = () => {
-    if (showFirstItem) {
-      dispatch(uiActions.secondItemOn());
-    } else {
-      dispatch(uiActions.firstItemOn());
-    }
-  };
-  const trash = () => {
-    if (showMoreItem) {
-      dispatch(uiActions.secondItemOff());
-      unregister(`items.1.name`);
-      unregister(`items.1.price`);
-      unregister(`items.1.quantity`);
-      unregister(`items.1.total`);
-    } else {
-      dispatch(uiActions.firstItemOff());
-    }
-  };
+  const darkmode = useAppSelector((state) => state.ui.isDarkMode);
+
   const action = () => {
     dispatch(uiActions.toogle());
-    dispatch(uiActions.firstItemOff());
-    dispatch(uiActions.secondItemOff());
   };
 
   const saveAsDraft = () => {
@@ -55,21 +34,39 @@ const ReactHookFrom: FC = () => {
 
   const {
     register,
-    unregister,
+    control,
     handleSubmit,
     watch,
     formState: { errors },
     setValue,
     getValues,
-  } = useForm<Invoices>();
+  } = useForm<Invoices>({
+    defaultValues: {
+      items: new Array<{
+        name: string;
+        quantity: number;
+        price: number;
+        total: number;
+      }>(),
+    },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "items",
+  });
 
   const onSubmit: SubmitHandler<Invoices> = async (data) => {
-    if (!showFirstItem || Object.keys(errors).length > 0) {
+    if (fields.length === 0 || Object.keys(errors).length > 0) {
       return;
     } else {
-      const total = showMoreItem
-        ? sumValue(data.items[0].total, data.items[1].total)
-        : data.items[0].total;
+      const initialValue = 0;
+      const total = data.items
+        .map((i) => i.total)
+        .reduce(
+          (accumulator, currentValue) => accumulator + currentValue,
+          initialValue
+        );
 
       const id = makeid();
       const date = data.createdAt;
@@ -86,8 +83,8 @@ const ReactHookFrom: FC = () => {
       dispatch(sendInvoiceData(newData));
 
       action();
-      sleep(1000)
-      router.push('/');
+      sleep(1000);
+      router.push("/");
     }
   };
 
@@ -97,36 +94,25 @@ const ReactHookFrom: FC = () => {
         info.name?.startsWith("items") &&
         (info.name?.endsWith("price") || info.name?.endsWith("quantity"))
       ) {
-        const index = parseInt(info.name.split(".")[0]);
-
-        const price = value.items?.at(index)?.price;
-        const quantity = value.items?.at(index)?.quantity;
-        register(`items.0.total`);
-        if (price && quantity) setValue(`items.0.total`, price * quantity);
-      }
-    });
-    return () => unsubscribe();
-  }, [watch, register]);
-
-  useEffect(() => {
-    const { unsubscribe } = watch((value, info) => {
-      if (
-        showMoreItem &&
-        info.name?.startsWith("items") &&
-        (info.name?.endsWith("price") || info.name?.endsWith("quantity"))
-      ) {
         const index = parseInt(info.name.split(".")[1]);
 
         const price = value.items?.at(index)?.price;
         const quantity = value.items?.at(index)?.quantity;
-        register(`items.1.total`);
-        if (price && quantity) setValue(`items.1.total`, price * quantity);
+
+        register(`items.${index}.total`, {
+          value: value.items?.[index]?.total,
+        });
+
+        if (price && quantity)
+          setValue(`items.${index}.total`, price * quantity);
       }
     });
     return () => unsubscribe();
-  }, [watch, register, handler, trash]);
+  }, [watch]);
 
-  const darkmode = useAppSelector((state) => state.ui.isDarkMode);
+  useEffect(() => {
+    remove(0);
+  }, [remove]);
 
   const senderStreetClassHandler = errors.senderAddress?.street
     ? ` ${styles.longInput} ${styles.invalid}`
@@ -165,34 +151,20 @@ const ReactHookFrom: FC = () => {
   const descriptionClassHandler = errors.description
     ? ` ${styles.longInput} ${styles.invalid}`
     : styles.longInput;
-  const itemNameClassHandler = errors.items?.[0]?.name
-    ? `${styles.name} ${styles.invalid}`
-    : styles.name;
-  const itemQtyClassHandler = errors.items?.[0]?.quantity
-    ? `${styles.qty} ${styles.invalid}`
-    : styles.qty;
-  const itemPriceClassHandler = errors.items?.[0]?.price
-    ? `${styles.price} ${styles.invalid}`
-    : styles.price;
-  const secondItemNameClassHandler = errors.items?.[1]?.name
-    ? `${styles.name} ${styles.invalid}`
-    : styles.name;
-  const secondItemQtyClassHandler = errors.items?.[1]?.quantity
-    ? `${styles.qty} ${styles.invalid}`
-    : styles.qty;
-  const secondItemPriceClassHandler = errors.items?.[1]?.price
-    ? `${styles.price} ${styles.invalid}`
-    : styles.price;
+  const itemNameClassHandler = errors.items
+    ? `${styles.itemName} ${styles.invalid}`
+    : styles.itemName;
+  const itemQtyClassHandler = errors.items
+    ? `${styles.itemQty} ${styles.invalid}`
+    : styles.itemQty;
+  const itemPriceClassHandler = errors.items
+    ? `${styles.itemPrice} ${styles.invalid}`
+    : styles.itemPrice;
 
   const darkWrapperClassHandler = darkmode
     ? `${styles.wrapper} ${styles.darkWrapper}`
     : styles.wrapper;
-  const darkTotalHandler = darkmode
-    ? `${styles.total} ${styles.darkTotal}`
-    : styles.total;
-  const darkSecondTotalHandler = darkmode
-    ? `${styles.secondItemTotal} ${styles.darkTotal}`
-    : styles.secondItemTotal;
+
   return (
     <>
       <div className={styles.backdrop} onClick={action} />
@@ -414,29 +386,34 @@ const ReactHookFrom: FC = () => {
             <div className={styles.itemList}>
               <h1>Item List</h1>
               <div className={styles.itemInputGrp}>
+                <div className={styles.labelGrp}>
+                  <label htmlFor="name"> Item Name</label>
+                  <label htmlFor="qty"> Qty.</label>
+                  <label htmlFor="price"> Price</label>
+                  <label htmlFor="total"> Total</label>
+                </div>
+
                 <div className={styles.container}>
-                  <div className={itemNameClassHandler}>
-                    <label htmlFor="item"> Item</label>
-                    {showFirstItem && (
-                      <input
-                        {...register("items.0.name", {
-                          required: true,
-                          validate: async (value) => {
-                            await sleep(1);
-                            return value.trim() !== "";
-                          },
-                        })}
-                      />
-                    )}
-                  </div>
-                  <div className={styles.info}>
-                    <div className={itemQtyClassHandler}>
-                      <label htmlFor="item"> Qty</label>
-                      {showFirstItem && (
+                  <div>
+                    {fields.map((item, index) => (
+                      <div key={item.id} className={styles.itemInput}>
                         <input
+                          className={itemNameClassHandler}
+                          id="name"
+                          type="text"
+                          {...register(`items.${index}.name`, {
+                            required: true,
+                            validate: async (value) => {
+                              await sleep(1);
+                              return value.trim() !== "";
+                            },
+                          })}
+                        />
+                        <input
+                          className={itemQtyClassHandler}
+                          id="qty"
                           type="number"
-                          defaultValue={0}
-                          {...register("items.0.quantity", {
+                          {...register(`items.${index}.quantity`, {
                             required: true,
                             validate: async (value) => {
                               await sleep(1);
@@ -444,15 +421,11 @@ const ReactHookFrom: FC = () => {
                             },
                           })}
                         />
-                      )}
-                    </div>
-                    <div className={itemPriceClassHandler}>
-                      <label htmlFor="price"> Price</label>
-                      {showFirstItem && (
                         <input
+                          className={itemPriceClassHandler}
                           type="number"
-                          defaultValue={0}
-                          {...register("items.0.price", {
+                          id="price"
+                          {...register(`items.${index}.price`, {
                             required: true,
                             validate: async (value) => {
                               await sleep(1);
@@ -460,90 +433,37 @@ const ReactHookFrom: FC = () => {
                             },
                           })}
                         />
-                      )}
-                    </div>
-
-                    <div className={darkTotalHandler}>
-                      <p>Total</p>
-                      {showFirstItem && <h2>{watch("items.0.total", 0)}</h2>}
-                    </div>
-
-                    {showFirstItem && (
-                      <div className={styles.firstTrashBtn}>
-                        <TrashBtn action={trash} />
+                        <input
+                          className={styles.itemTotal}
+                          disabled
+                          id="total"
+                          type="number"
+                          {...register(`items.${index}.total`, {
+                            required: true,
+                            validate: async (value) => {
+                              await sleep(1);
+                              return value >= 1;
+                            },
+                          })}
+                        />
+                        <TrashBtn
+                          action={() => {
+                            remove(index);
+                          }}
+                        />
                       </div>
-                    )}
+                    ))}
+
+                    <div className={styles.itemBtn}>
+                      <LightGrayBtn
+                        title={"+ Add New Item"}
+                        action={() => {
+                          append({ name: "", quantity: 0, price: 0, total: 0 });
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
-                <div className={styles.container}>
-                  {showMoreItem && (
-                    <div className={secondItemNameClassHandler}>
-                      <label htmlFor="itemName"> Item</label>
-                      <input
-                        disabled={!showMoreItem}
-                        defaultValue={""}
-                        {...register("items.1.name", {
-                          required: true,
-                          validate: async (value) => {
-                            await sleep(1);
-                            return value.trim() !== "";
-                          },
-                        })}
-                      />
-                    </div>
-                  )}
-                  <div className={styles.info}>
-                    {showMoreItem && (
-                      <div className={secondItemQtyClassHandler}>
-                        <label htmlFor="item"> Qty</label>
-                        <input
-                          disabled={!showMoreItem}
-                          type="number"
-                          defaultValue={0}
-                          {...register("items.1.quantity", {
-                            required: true,
-                            validate: async (value) => {
-                              await sleep(1);
-                              return value >= 1;
-                            },
-                          })}
-                        />
-                      </div>
-                    )}
-
-                    {showMoreItem && (
-                      <div className={secondItemPriceClassHandler}>
-                        <label htmlFor="item"> Price</label>
-                        <input
-                          disabled={!showMoreItem}
-                          type="number"
-                          defaultValue={0}
-                          {...register("items.1.price", {
-                            required: true,
-                            validate: async (value) => {
-                              await sleep(1);
-                              return value >= 1;
-                            },
-                          })}
-                        />
-                      </div>
-                    )}
-
-                    {showMoreItem && (
-                      <>
-                        <div className={darkSecondTotalHandler}>
-                          <h2> {watch("items.1.total", 0)}</h2>
-                        </div>
-                        <div className={styles.trashBtn}>
-                          <TrashBtn action={trash} />
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </div>
-              </div>
-              <div className={styles.itemBtn}>
-                <LightGrayBtn title={"+ Add New Item"} action={handler} />
               </div>
             </div>
 
@@ -571,7 +491,7 @@ const ReactHookFrom: FC = () => {
               <p>- All fields must be added</p>
             </div>
           )}
-          {!showFirstItem && (
+          {fields.length === 0 && (
             <div className={styles.errorMsg}>
               {" "}
               <p> - An item must be added</p>

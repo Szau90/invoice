@@ -60,7 +60,7 @@ const InvoiceDetail: React.FC<{
             paymentDue={paymentDue}
             createdAt={createdAt}
             description={description}
-            item={item}
+    
             status={status}
           />
         )}

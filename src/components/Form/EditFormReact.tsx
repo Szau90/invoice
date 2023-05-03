@@ -33,7 +33,7 @@ const EditFormReact: React.FC<{
   createdAt: Date;
   description: string;
   paymentDue: Date;
-  items: Item[];
+
   status: string;
 }> = (props) => {
   const {

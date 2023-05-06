@@ -22,11 +22,20 @@
     display: none;
   }
 
-@media (max-width:375) {
+@media (max-width:400px) {
+    .container {
+        width: 279px;
+    }
     .info {
         display: flex;
         flex-flow: row nowrap;
         width: 96px;
         color: #7e88c3;
+      }
+      .desktop {
+        display: none;;
+      }
+      .name {
+        width: 120px;
       }
 }

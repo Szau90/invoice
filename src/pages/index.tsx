@@ -12,6 +12,9 @@ import ReactHookFrom from "@/components/Form/ReactHookFrom";
 import { useEffect, useState } from "react";
 import NoInvoice from "@/components/Ui/NoInvoice";
 
+
+
+
 const Home = ({ invoices }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const showModal = useAppSelector((state) => state.ui.showFormModal);
   const showFilter = useAppSelector((state) => state.ui.showCheckboxModal);

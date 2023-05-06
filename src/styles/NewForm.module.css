@@ -380,6 +380,7 @@
 }
 .qty label {
   width: 52px;
+  
 }
 .price label {
   width: 106px;
@@ -465,6 +466,12 @@
 .invalid label {
   color: #ec5757;
 }
+.mobileItemLabels{
+  display: none;
+}
+.itemInput label:nth-child(1){
+  display: none;
+}
 
 @media (max-width: 768px) {
   .wrapper {
@@ -476,7 +483,7 @@
   }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 400px) {
   .wrapper {
     width: 375px;
   }
@@ -589,4 +596,31 @@
   .hide {
     display: block;
   }
+  .container{
+    
+    flex-flow: column wrap;
+  }
+  .itemName {
+    width: 327px;
+    margin-bottom: 40px;
+  }
+  .mobileItemLabels label:nth-child(1){
+    margin-right: 45px;
+  }
+  .mobileItemLabels label:nth-child(2){
+    margin-right: 100px;
+  }
+  .labelGrp label{
+    display: none;
+  }
+ .itemInput{
+  margin-bottom: 50px;
+ }
+ .itemInput label:nth-child(1){
+  display: block;
+}
+.mobileItemLabels {
+  display: flex;
+}
+
 }

@@ -229,7 +229,7 @@
   width: 100px;
 }
 
-@media (max-width: 375px) {
+@media (max-width: 400px) {
   .table {
     display: grid;
     width: 327px;
@@ -239,17 +239,20 @@
     grid-row: 1;
     margin: 0;
     width: fit-content;
+    margin-left:20px;
   }
   .col2 {
     grid-column: 2;
     grid-row: 1;
     margin: 0;
-    margin-top: 225px;
+    margin-top: 220px;
+    margin-left:20px;
   }
   .col3 {
     grid-column: 1;
     grid-row: 2;
     margin: 0;
+    margin-left: 20px;
   }
   .col4 {
     grid-column: 1;

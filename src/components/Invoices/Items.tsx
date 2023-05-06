@@ -6,13 +6,18 @@ const Items: React.FC<{ items: Item[] }> = ({ items }) => {
     <>
       {items.map((item, index) => (
         <div key={index} className={styles.container}>
-          <h1  className={styles.name}>{item.name}</h1>
-          <div  className={`${styles.mobile} ${styles.info}`}>
-            <h1>{item.quantity} x</h1>
-            <h1 >£ {item.price}</h1>
+          <div className={styles.wrapper}>
+            <h1 className={styles.name}>{item.name}</h1>
+            <div className={`${styles.mobile} ${styles.info}`}>
+              <h1>{item.quantity} x</h1>
+              <h1>£ {item.price}</h1>
+            </div>
           </div>
-          <h1 className={styles.qty}>{item.quantity}</h1>
-          <h1 className={styles.price}> £ {item.price}</h1>
+          <h1 className={`${styles.qty} ${styles.desktop}`}>{item.quantity}</h1>
+          <h1 className={`${styles.price} ${styles.desktop}`}>
+            {" "}
+            £ {item.price}
+          </h1>
           <h1 className={styles.total}>£ {item.total}</h1>
         </div>
       ))}

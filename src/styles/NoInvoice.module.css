@@ -42,4 +42,12 @@
     top:70%;
 
   }
+
+}
+@media (max-width:400px) {
+  
+  .box {
+    top:85%;
+
+  }
 }

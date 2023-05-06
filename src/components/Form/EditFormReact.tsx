@@ -424,6 +424,7 @@ const EditFormReact: React.FC<{
                   <div>
                     {fields.map((item, index) => (
                       <div key={item.id} className={styles.itemInput}>
+                        <label htmlFor="name"> Item Name</label>
                         <input
                           className={itemNameClassHandler}
                           id="name"
@@ -436,6 +437,11 @@ const EditFormReact: React.FC<{
                             },
                           })}
                         />
+                        <div className={styles.mobileItemLabels}>
+                          <label htmlFor="qty"> Qty.</label>
+                          <label htmlFor="price"> Price</label>
+                          <label htmlFor="total"> Total</label>
+                        </div>
                         <input
                           className={itemQtyClassHandler}
                           id="qty"

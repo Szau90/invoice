@@ -229,7 +229,7 @@
   width: 100px;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 512px) {
   .table {
     display: grid;
     width: 327px;

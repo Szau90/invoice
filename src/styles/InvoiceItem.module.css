@@ -22,7 +22,7 @@
     justify-content: center;
   }
 }
-@media (max-width: 400px) {
+@media (max-width: 512px) {
   .wrapper {
     width: 100%;
     display: flex;

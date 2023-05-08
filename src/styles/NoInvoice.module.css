@@ -34,7 +34,7 @@
   color: #dfe3fa;
 }
 
-@media (max-width:768px) {
+@media (max-width:1024px) {
   .wrapper {
     width: 100%;
   }
@@ -44,7 +44,7 @@
   }
 
 }
-@media (max-width:512px) {
+@media (max-width:712px) {
   
   .box {
     top:85%;

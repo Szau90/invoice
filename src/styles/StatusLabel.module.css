@@ -129,7 +129,7 @@
   color:#dfe3fa;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .box {
     width: 688px;
   }
@@ -137,7 +137,7 @@
     width: 688px;
   }
 }
-@media (max-width: 512px) {
+@media (max-width: 712px) {
   .box {
     width: 327px;
   }

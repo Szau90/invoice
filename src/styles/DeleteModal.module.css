@@ -66,7 +66,7 @@
   background: rgba(0, 0, 0, 0.15);
 }
 
-@media (max-width: 512px) {
+@media (max-width: 712px) {
   .modal {
     width: 327px;
   }

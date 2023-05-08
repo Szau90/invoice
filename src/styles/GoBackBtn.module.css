@@ -30,7 +30,7 @@
   justify-content: space-between;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .btn {
     margin-top: 129px;
   }

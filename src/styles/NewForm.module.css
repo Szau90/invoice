@@ -473,7 +473,7 @@
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .wrapper {
     width: 616px;
     margin-top: 100px;
@@ -483,7 +483,7 @@
   }
 }
 
-@media (max-width: 512px) {
+@media (max-width: 712px) {
   .wrapper {
     width: 375px;
   }

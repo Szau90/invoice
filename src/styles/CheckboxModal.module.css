@@ -49,7 +49,7 @@
   color: #fff;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .card {
     top: 202px;
     left: 46%;

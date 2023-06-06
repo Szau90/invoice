@@ -1,3 +1,5 @@
+import { ObjectId } from "mongodb";
+
 export interface Item {
   name:string;
   price: number;
@@ -28,6 +30,8 @@ interface Invoices {
   };
   status: string;
   total: number;
+  _id:string | undefined;
+ 
 }
 
 export default Invoices;

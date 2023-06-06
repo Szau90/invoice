@@ -171,6 +171,7 @@ export const getStaticProps: GetStaticProps<{
         status: i.status,
         paymentDue: i.paymentDue,
         total: i.total,
+        _id:i._id.toString(),
       })),
     },
     revalidate: 1,

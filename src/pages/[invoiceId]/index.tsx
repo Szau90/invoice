@@ -66,22 +66,26 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<{
   invoices: Invoices;
-}> = async (context:GetStaticPropsContext): Promise<GetStaticPropsResult<{ invoices: Invoices }>> => {
+}> = async (context:GetStaticPropsContext): Promise<GetStaticPropsResult<{ invoices: any }>> => {
  
   if (typeof context.params !== "undefined"){
   const invoiceId = context.params.invoiceId
   
-  const res = await fetch (`${API_URL}/api/${invoiceId}`)
-  if (!res.ok) {
-    throw new Error('Cannot find invoice')
-  }
-  const invoices:Invoices = await res.json()
+  const client = await MongoClient.connect(
+    process.env.MONGO_URL
+  );
+  const db = client.db();
+  const invoice = await db.collection("invoices").findOne({ id: invoiceId });
 
+  client.close()
   
   
   return {
     props: {
-      invoices
+      invoices: {
+        ...invoice,
+      _id: invoice?._id.toString(),
+      }
     },
     revalidate: 1,
   };

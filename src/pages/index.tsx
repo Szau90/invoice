@@ -114,6 +114,8 @@ const Home = ({ invoices }: InferGetStaticPropsType<typeof getStaticProps>) => {
         />
       ));
 
+    
+
   return (
     <>
       <Head>

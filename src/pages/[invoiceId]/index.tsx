@@ -1,33 +1,17 @@
 import InvoiceDetail from "@/components/Invoices/InvoiceDetail";
 import Invoices from "@/models/Invoices";
-import { GetStaticProps, InferGetStaticPropsType, GetStaticPaths } from "next";
+import { GetStaticProps, InferGetStaticPropsType, GetStaticPaths, GetStaticPropsContext, GetStaticPropsResult } from "next";
 import { useRouter } from "next/router";
 import { MongoClient } from "mongodb";
 import { useAppSelector } from "@/Hooks/hooks";
 import Head from "next/head";
+
+const API_URL = process.env.API_URL || "http://localhost:3000"; 
+
 const DetailPage = ({
   invoices,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const router = useRouter();
-
-  const invoiceDetails = invoices
-    .filter((f) => f.id === router.query.invoiceId)
-    .map((invoice) => (
-      <InvoiceDetail
-        key={invoice.id}
-        id={invoice.id}
-        status={invoice.status}
-        senderAddress={invoice.senderAddress}
-        createdAt={invoice.createdAt}
-        clientName={invoice.clientName}
-        clientEmail={invoice.clientEmail}
-        clientAddress={invoice.clientAddress}
-        paymentDue={invoice.paymentDue}
-        item={invoice.items}
-        price={invoice.total}
-        description={invoice.description}
-      />
-    ));
+    
 
   const darkMode = useAppSelector((state) => state.ui.isDarkMode);
 
@@ -45,7 +29,20 @@ const DetailPage = ({
         )}
       </Head>
 
-      <main>{invoiceDetails}</main>
+      <main><InvoiceDetail
+        key={invoices.id}
+        id={invoices.id}
+        status={invoices.status}
+        senderAddress={invoices.senderAddress}
+        createdAt={invoices.createdAt}
+        clientName={invoices.clientName}
+        clientEmail={invoices.clientEmail}
+        clientAddress={invoices.clientAddress}
+        paymentDue={invoices.paymentDue}
+        item={invoices.items}
+        price={invoices.total}
+        description={invoices.description}
+      /></main>
     </>
   );
 };
@@ -68,35 +65,33 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps<{
-  invoices: Invoices[];
-}> = async () => {
-  const client = await MongoClient.connect(
-    process.env.MONGO_URL
-  );
-  const db = client.db();
+  invoices: Invoices;
+}> = async (context:GetStaticPropsContext): Promise<GetStaticPropsResult<{ invoices: Invoices }>> => {
+ 
+  if (typeof context.params !== "undefined"){
+  const invoiceId = context.params.invoiceId
+  
+  const res = await fetch (`${API_URL}/api/${invoiceId}`)
+  if (!res.ok) {
+    throw new Error('Cannot find invoice')
+  }
+  const invoices:Invoices = await res.json()
 
-  const invoiceCollection = db.collection("invoices");
-
-  const result = await invoiceCollection.find().toArray();
-
+  
+  
   return {
     props: {
-      invoices: result.map((i) => ({
-        clientAddress: i.clientAddress,
-        clientEmail: i.clientEmail,
-        clientName: i.clientName,
-        createdAt: i.createdAt,
-        description: i.description,
-        id: i.id,
-        items: i.items,
-        paymentTerms: i.paymentTerms,
-        senderAddress: i.senderAddress,
-        status: i.status,
-        paymentDue: i.paymentDue,
-        total: i.total,
-      })),
+      invoices
     },
     revalidate: 1,
   };
+  }
+  return {
+    props: {
+      invoices:{} as Invoices
+    },
+    revalidate: 1,
+  }
+
 };
 export default DetailPage;
